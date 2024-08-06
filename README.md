@@ -4,9 +4,37 @@ Server-sent event 是基於 HTTP spec，提供一個建立由 server 端至 clie
 
 Client 借助 `Accept` header 所列的 media type `text/event-stream` 來啟動這個 SSE connection，初始化之後就不用主動向 server 發送請求，可以自動接收更新（參考[官方文件](https://html.spec.whatwg.org/multipage/server-sent-events.html)）
 
+### SSE with Spring 6 Webflux 
+
+#### Test Result
+1. 可以看到右邊是 flux stream，左邊是 server sent stream 的資料格式（包含 event ID 以及 data)
+   ![image](src/main/java/resources/static/img/img.png)
+
+2. Console 實際像這樣，上半部視窗是 server side endpoint，下半部是 client side logs
+
+   ![image](src/main/java/resources/static/img/demo.gif)
+
+[參考資料來源](https://www.baeldung.com/spring-server-sent-events)
+
+#### Server:
+
+http://localhost:8081/sse-server/stream-flux
+
+http://localhost:8081/sse-server/stream-sse
+
+#### Client:
+
+http://localhost:8082/sse-consumer/launch-sse-from-flux-endpoint-client
+
+http://localhost:8082/sse-consumer/launch-sse-client
+
+http://localhost:8082/sse-consumer/launch-flux-client
+
 ### JAX-RS 2.1 implementation of SSE
 
-這個 repo 會實作 JAX-RS Server API 用以發布事件，另外也會用 (1) HTTP client 例如 `curl` 工具，或者使用 `JAX-RS Client API` 消費 server sent event
+[未完成]
+
+實作 JAX-RS Server API 用以發布事件，另外也會用 (1) HTTP client 例如 `curl` 工具，或者使用 `JAX-RS Client API` 消費 server sent event
 
 ## 1. 瞭解 SSE event
 
